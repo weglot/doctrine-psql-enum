@@ -1,0 +1,39 @@
+includes:
+    - vendor/phpstan/phpstan-doctrine/extension.neon
+    - vendor/phpstan/phpstan-doctrine/rules.neon
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+    - vendor/phpstan/phpstan-phpunit/rules.neon
+    - vendor/phpstan/phpstan-symfony/extension.neon
+    - vendor/phpstan/phpstan-symfony/rules.neon
+    - vendor/phpstan/phpstan-strict-rules/rules.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    level: 8
+    tmpDir: .cache/phpstan
+    paths:
+        - src/
+        - tests/
+    exceptions:
+        check:
+            missingCheckedExceptionInThrows: true
+            tooWideThrowType: true
+        reportUncheckedExceptionDeadCatch: false
+        implicitThrows: false
+        uncheckedExceptionClasses:
+            - LogicException
+            # Doctrine Exception
+            - Doctrine\DBAL\Exception
+            - Doctrine\ORM\Exception\ORMException
+
+    checkMissingCallableSignature: true
+
+    ignoreErrors:
+        - # See https://github.com/doctrine/dbal/pull/7038
+            message: "#its root namespace Doctrine\\.$#"
+            identifier: method.internal
+            path: tests
+        - # Wait for https://github.com/doctrine/dbal/pull/7238
+            message: "#\\'enumType\\' given\\.$#"
+            identifier: argument.type
+            path: src/Doctrine/Schema/EnumComparator.php

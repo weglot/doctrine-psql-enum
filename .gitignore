@@ -1,0 +1,25 @@
+###> common ###
+.DS_Store
+.idea
+###< common ###
+
+.cache
+
+###> composer ###
+composer.lock
+vendor
+###< composer ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> phpstan/phpstan ###
+/phpstan.neon
+###< phpstan/phpstan ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.result.cache
+###< phpunit/phpunit ###

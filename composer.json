@@ -1,0 +1,50 @@
+{
+    "name": "weglot/doctrine-psql-enum",
+    "description": "doctrine bundle to generate enum constraint checks on postgresql",
+    "type": "symfony-bundle",
+    "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=8.4",
+        "ext-pdo_pgsql": "*",
+        "doctrine/dbal": "^4.4",
+        "doctrine/doctrine-bundle": "^3.0",
+        "doctrine/orm": "^3.5",
+        "symfony/config": "^7.3 || ^8.0",
+        "symfony/dependency-injection": "^7.3 || ^8.0",
+        "symfony/http-kernel": "^7.3 || ^8.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan": "^2.1",
+        "phpstan/phpstan-doctrine": "^2.0",
+        "phpstan/phpstan-phpunit": "^2.0",
+        "phpstan/phpstan-strict-rules": "^2.0",
+        "phpstan/phpstan-symfony": "^2.0",
+        "phpunit/phpunit": "^12.1",
+        "rector/rector": "^2.3",
+        "shipmonk/composer-dependency-analyser": "^1.8",
+        "symfony/var-dumper": "^7.3 || ^8.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Weglot\\DoctrinePostgresEnum\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Weglot\\DoctrinePostgresEnum\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "analyser": "vendor/bin/composer-dependency-analyser",
+        "cs": "vendor/bin/php-cs-fixer fix",
+        "phpstan": "vendor/bin/phpstan",
+        "rector": "vendor/bin/php-cs-fixer fix",
+        "test": "vendor/bin/phpunit"
+    }
+}

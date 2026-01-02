@@ -1,0 +1,50 @@
+name: Checks
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+    workflow_dispatch:
+
+concurrency:
+    group: checks-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    tests:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v6
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.5'
+                  tools: composer
+
+            - name: Install Composer Dependencies
+              run: composer install --prefer-dist --no-progress --no-interaction
+              shell: bash
+
+            - name: Look for missing/unused dependencies
+              if: always()
+              run: vendor/bin/composer-dependency-analyser
+
+            - name: Run php-cs-fixer
+              if: always()
+              run: vendor/bin/php-cs-fixer --dry-run --diff fix
+
+            - name: Run phpstan
+              if: always()
+              run: vendor/bin/phpstan
+
+            - name: Run rector
+              if: always()
+              run: vendor/bin/rector --no-progress-bar --dry-run
+
+            - name: Run tests
+              if: always()
+              run: vendor/bin/phpunit
