@@ -1,4 +1,5 @@
 includes:
+    - vendor/phpstan/phpstan-deprecation-rules/rules.neon
     - vendor/phpstan/phpstan-doctrine/extension.neon
     - vendor/phpstan/phpstan-doctrine/rules.neon
     - vendor/phpstan/phpstan-phpunit/extension.neon
@@ -33,7 +34,3 @@ parameters:
             message: "#its root namespace Doctrine\\.$#"
             identifier: method.internal
             path: tests
-        - # Wait for https://github.com/doctrine/dbal/pull/7238
-            message: "#\\'enumType\\' given\\.$#"
-            identifier: argument.type
-            path: src/Doctrine/Schema/EnumComparator.php

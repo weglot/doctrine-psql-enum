@@ -17,7 +17,7 @@ class EnumComparator extends Comparator
         }
 
         // If the column is an enum, we still want to check it.
-        return !$column1->hasPlatformOption('enumType')
-            && !$column2->hasPlatformOption('enumType');
+        return null === $column1->getEnumType()
+            && null === $column2->getEnumType();
     }
 }
